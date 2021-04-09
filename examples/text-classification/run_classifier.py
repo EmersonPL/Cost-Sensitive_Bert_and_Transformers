@@ -67,8 +67,7 @@ def acc_and_f1(preds, labels):
         "acc" : acc,
         "mcc" : mcc, 
     }
-    for average in [ "binary", "micro", "macro", "weighted"] : # AE
-    # for average in ["micro", "macro", "weighted"] : # SA (qualquer coisa com mais de 2 labels)
+    for average in [ "binary", "micro", "macro", "weighted"] : # remove "binary" if using more than 2 labels
         f1        = f1_score       (y_true=labels, y_pred=preds, average=average)
         precision = precision_score(y_true=labels, y_pred=preds, average=average)
         recall    = recall_score   (y_true=labels, y_pred=preds, average=average)
@@ -309,7 +308,7 @@ def main():
     set_seed(training_args.seed)
 
     num_labels  = 2 ## Defined in processor. Change labels before changing this (also hardcoded elsewhere) .
-    output_mode = 'regression'
+    output_mode = 'classification'
 
     # Load pretrained model and tokenizer
     #
